@@ -1,0 +1,47 @@
+<html>
+<head>
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<link href="https://192.168.120.201/static/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://192.168.120.201/static/bootstrap.min.js"></script>
+<script src="https://192.168.120.201/static/jquery.min.js"></script>
+
+</head>
+
+<body>
+{% if user.is_active %}
+  <h2> Welcome, {{user.username}} </h2>
+    <a href="{% url 'logout' %}">로그아웃</a>
+
+{% else %}
+    <div class="container" style="margin-top:30px">
+    <div class="col-md-3"></div>
+    <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title"><strong>Sign In </strong></h3></div>
+        <div class="panel-body">
+            <form method="POST" action="{% url 'login' %}" class="sign-in-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">ID</label>
+                    <input class="form-control" id="{{ form.username.id_for_label }}" maxlength="15" name="{{ form.username.html_name }}" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    <input class="form-control" id="{{ form.password.id_for_label }}" maxlength="120" name="{{ form.password.html_name }}" type="password" />
+                </div>
+                    <input type="submit" class="btn btn-sm btn-default" value="Sign in">
+                    <input type="hidden" name="next" value="">
+            </form>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+
+
+{% endif %}
+
+</body>
+</html>

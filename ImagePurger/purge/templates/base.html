@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+    <link rel="stylesheet" href="https://192.168.120.201/static/bootstrap.min.css">
+    <link rel="stylesheet" href="https://192.168.120.201/static/bootstrap-theme.min.css">
+</head>
+<body>
+
+{% block login %}
+{% endblock %}
+
+{% block nav %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href=".">CyImage Purging </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        {% block form %}
+        {% endblock %}
+
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+{% endblock %}
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+{% block script %}
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+    <script src="https://192.168.120.201/static/jquery.min.js">
+    <script src="https://192.168.120.201/static/bootstrap.min.js"></script>
+{% endblock %}
+</body>
+</html>

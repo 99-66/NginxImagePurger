@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block login %}
+
+{% endblock %}
+
+{% block form %}
+    <form class="navbar-form navbar-left" role="search" action="." method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            {{ form.url }}
+        </div>
+        <button type="submit" class="btn btn-default">Purge</button>
+    </form>
+
+    {% if user.is_active %}
+        <p class="navbar-text navbar-right"><a href="{% url 'logout' %}">로그아웃</a></p>
+        <p class="navbar-text navbar-right">Signed in as {{ user.username }}</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="panel panel-default" style="width:50%; display: block; margin-left: auto; margin-right: auto">
+  <!-- Default panel contents -->
+    <div class="panel-heading"><b>Nginx Image Cache Purger</b></div>
+  <div class="panel-body">
+      {% if requrl %}
+          <p> Cache purge Request URL is <b>{{ requrl }}</b> </p>
+      {% else %}
+          <p> Cache를 삭제하길 원하는 Image의 Full URL 입력해주세요.</p>
+          <p> 예> http://c1img.cyworld.co.kr/img/cymain/2015/logo.png</p>
+          <p> Purge는 Image Cache 서버를 대상으로 요청합니다. Purge 대상 서버는 아래와 같습니다.</p>
+      {% endif %}
+  </div>
+
+  <table class="table" style="text-align: center">
+    <tr>
+        <td>Purge Target Server</td>
+        <td>Result</td>
+        <td>Status code</td>
+    </tr>
+    {% if result %}
+    {% for server, resultVal in result.items %}
+        <tr>
+            <td>{{ server }}</td>
+            {% for val in resultVal %}
+            <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    {% else %}
+        {% for server in servers %}
+            <tr>
+                <td>{{ server }}</td>
+                <td> Ready </td>
+                <td> Ready </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+  </table>
+
+
+</div>
+
+{% endblock %}
